@@ -1,3 +1,5 @@
+/*TODO sistemare la webcam piu piccola*/
+
 #webgazerVideoContainer {
     position: fixed !important;
     z-index: 9999 !important; 

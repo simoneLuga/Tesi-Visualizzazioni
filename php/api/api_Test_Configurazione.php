@@ -1,3 +1,3 @@
 <?php
-    require '../Test_configurazione.php';
+    require '../test_configurazione.php';
 ?>
