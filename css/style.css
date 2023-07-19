@@ -1,16 +1,27 @@
 /*TODO sistemare la webcam piu piccola*/
 
 #webgazerVideoContainer {
-    position: fixed !important;
-    z-index: 9999 !important;
-    width: 120px !important;
-    height: 80px !important;
-    display: block !important;
+    width: 220px !important;
+    height: 140px !important;
+    top: 60px !important;
+    left: -10px !important;
 }
 
 #webgazerVideoFeed {
-    width: 120px !important;
-    height: 80px !important;
+    width: 220px !important;
+    height: 140px !important;
+}
+
+#webgazerFaceOverlay{
+    width: 220px !important;
+    height: 140px !important;
+}
+
+#webgazerFaceFeedbackBox{
+    width: 85px !important;
+    height: 85px !important;
+    top: 20px !important;
+    left: 60px !important;
 }
 
 .tipoSezione1 {
@@ -92,3 +103,12 @@ footer {
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }

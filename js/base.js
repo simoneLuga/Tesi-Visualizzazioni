@@ -10,15 +10,24 @@ function showTestConfigurazione() {
     axios.post("../php/api/api_test_Configurazione.php"
     ).then(response => {
         main.innerHTML = response.data;
-        webgazer.setGazeListener(function (data, elapsedTime) {
-            if (data == null) {
-                return;
-            }
-            var xprediction = data.x; //these x coordinates are relative to the viewport
-            var yprediction = data.y; //these y coordinates are relative to the viewport
-            console.log("x: " + xprediction + " y: " + yprediction);
-        }).begin();
     });
+}
+
+function startConf(){
+    document.getElementById("btn_start").style.display="none";
+    document.getElementById("btn_stop").style.display="inline";
+
+    webgazer.setGazeListener(function (data, elapsedTime) {
+        if (data == null) {
+            return;
+        }
+        var xprediction = data.x; //these x coordinates are relative to the viewport
+        var yprediction = data.y; //these y coordinates are relative to the viewport
+        console.log("x: " + xprediction + " y: " + yprediction);
+    }).begin();
+}
+function stopConf(){
+    window.location.reload()
 }
 
 function showStorico() {
