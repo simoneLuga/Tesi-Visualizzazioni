@@ -38,6 +38,7 @@ create table Utente (
      Cognome varchar(30) not null,
      ID int not null AUTO_INCREMENT,
      Pass varchar(30),
+     TypeUser char(1) not null,
      primary key (ID));
 
 create table Visualizzation (
