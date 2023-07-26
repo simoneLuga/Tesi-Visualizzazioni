@@ -26,7 +26,7 @@
                             aria-label="button test configurazione">Visualizza Test</button>
                     </li>
                     <li class="nav-item"> 
-                        <button class="nav-link switch" onclick="showCreaTest(this)"
+                        <button class="nav-link switch" id="btn_creaTest" onclick="showCreaTest(this)"
                             aria-label="button test configurazione">Crea test</button>
                     </li>
                     <li class="nav-item">

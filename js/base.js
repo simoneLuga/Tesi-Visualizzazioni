@@ -50,23 +50,6 @@ function showStorico(e) {
     });
 }
 
-function showCreaTest(e) {
-    switchButton(e)
-    window.onscroll = null;
-    axios.post("../api/api_crea_test.php"
-    ).then(response => {
-        main.innerHTML = response.data;
-        const dragArea = document.querySelector(".wrapper");
-        new Sortable(dragArea,{
-            animation: 350
-        });
-        wrapperListCreateTest = document.querySelector(".wrapper");
-    });
-    document.getElementById("btn_creaTest").classList.add="active";
-}
-
-
-
 
 
 function openPageUser(element){

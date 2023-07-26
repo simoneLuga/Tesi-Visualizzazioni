@@ -8,11 +8,10 @@
                         <span class="col-5" style="margin-top: 8px; text-align: center;">
                             <?php echo $test['Nome'] ?>
                         </span>
-
                         <div class="btn-group col-4 " role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-outline-dark">Try</button>
-                            <button type="button" class="btn btn-outline-dark" onclick="openModificaTest(<?php echo $test['ID'] ?>)">Mod</button>
-                            <button type="button" class="btn btn-outline-dark">Del</button>
+                            <button type="button" class="btn btn-outline-dark" onclick="openModificaTest(<?php echo $test['ID'] ?>,'<?php echo $test['Nome'] ?>');" disabled>Mod</button>
+                            <button type="button" class="btn btn-outline-dark" onclick="delTest(<?php echo $test['ID'] ?>)" >Del</button>
                         </div>
                     </div>
 

@@ -4,6 +4,22 @@ var pagineTestArray = [];
 var idDaEliminare = 0;
 var photoOrLink = 0;
 
+function showCreaTest(e) {
+    switchButton(e)
+    window.onscroll = null;
+    axios.post("../api/api_crea_test.php"
+    ).then(response => {
+        main.innerHTML = response.data;
+        const dragArea = document.querySelector(".wrapper");
+        new Sortable(dragArea,{
+            animation: 350
+        });
+        wrapperListCreateTest = document.querySelector(".wrapper");
+        pagineTestArray = [];
+    });
+}
+
+
 function changeTitleTest(e) {
     titleTest = e.value;
 }
@@ -54,14 +70,14 @@ function confermaEliminazione() {
 function aggiungiPagina() {
     var id = pagineTestArray.length;
     pagineTestArray.push({ id: id, type: photoOrLink == 1 ? "photo" : "link", value: photoOrLink == 1 ? temp_fotoPage : document.getElementById("iframeCustom").src });
-    creaHtmlPagine();
+    creaHtmlPagine(pagineTestArray);
 }
 
-function creaHtmlPagine() {
+function creaHtmlPagine(array) {
     var wrapper = document.querySelector(".wrapper");
     wrapper.innerHTML = "";
     var index = 0;
-    pagineTestArray.forEach(function (tripla) {
+    array.forEach(function (tripla) {
         tripla.id = index;
         var element = "<div class='item row m-1' id=" + tripla.id + " onclick='openPageCreate(this)'>\
         <i class='fas fa-bars col-1' style='margin-top: 10px'></i>\
@@ -86,10 +102,15 @@ function openPageCreate(element) {
     var preview = document.getElementById("preview");
     preview.innerHTML = "";
     if (tempElement.type == "photo") {
-        preview.innerHTML = "<img class= ' mx-auto d-block responsive col-12' src=" + URL.createObjectURL(new Blob([tempElement.value])) + ">"
+        preview.innerHTML = "<img class= ' mx-auto d-block responsive col-12' src=" + URL.createObjectURL(new Blob([tempElement.value])) +">"
+        
     } else {
         preview.innerHTML = " <iframe class= ' mx-auto d-block responsive col-12 ' src = " + tempElement.value + "></iframe>"
     }
+}
+
+function fix(e,src){
+    e.src = src;
 }
 
 function saveNewTest() {

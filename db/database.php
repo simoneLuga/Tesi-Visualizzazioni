@@ -32,7 +32,8 @@ class DatabaseHelper
       return false;
    }
 
-   public function updateimg_view($id_page, $location){
+   public function updateimg_view($id_page, $location)
+   {
       if ($insert_stmt = $this->db->prepare("UPDATE visualizzation SET Photo = ? WHERE ID = ?")) {
          $insert_stmt->bind_param('si', $location, $id_page);
          // Esegui la query ottenuta. 
@@ -43,7 +44,8 @@ class DatabaseHelper
    //da rivedere
    public function get_test_creator()
    {
-      if ( $stmt = $this->db->prepare("SELECT * from test as t where t.UtenteCreatore_ID = ?")
+      if (
+         $stmt = $this->db->prepare("SELECT * from test as t where t.UtenteCreatore_ID = ?")
       ) {
          $stmt->bind_param('i', $_SESSION["IdUtente"]);
          $stmt->execute();
@@ -52,8 +54,9 @@ class DatabaseHelper
       }
    }
 
-   public function get_pagine_test($idTest){
-      if ( $stmt = $this->db->prepare("SELECT * from visualizzation as v where v.ID_Test_Padre = ?")) {
+   public function get_pagine_test($idTest)
+   {
+      if ($stmt = $this->db->prepare("SELECT * from visualizzation as v where v.ID_Test_Padre = ?")) {
          $stmt->bind_param('i', $idTest);
          $stmt->execute();
          $result = $stmt->get_result();
@@ -63,7 +66,8 @@ class DatabaseHelper
 
    public function get_all_test()
    {
-      if ( $stmt = $this->db->prepare("SELECT * from test as t")
+      if (
+         $stmt = $this->db->prepare("SELECT * from test as t")
       ) {
          $stmt->execute();
          $result = $stmt->get_result();
@@ -95,7 +99,7 @@ class DatabaseHelper
    public function save_new_test($titolo)
    {
       if ($stmt = $this->db->prepare("INSERT INTO  test(Nome, UtenteCreatore_id) VALUES (?, ?)")) {
-         $stmt->bind_param('si', $titolo,  $_SESSION["IdUtente"]);
+         $stmt->bind_param('si', $titolo, $_SESSION["IdUtente"]);
          // Eseguo la query ottenuta.
          $stmt->execute();
          return $stmt->insert_id; //return id del test appena caricato
@@ -120,12 +124,31 @@ class DatabaseHelper
          $stmt->bind_param('i', $idTestPadre);
          // Eseguo la query ottenuta.
          $stmt->execute();
-         return $stmt->insert_id; 
+         return $stmt->insert_id;
       }
    }
 
-
+   public function del_test($idTest)
+   {
+      //elimino le registrazioni
+      if ($del_stmt = $this->db->prepare("DELETE from registrazione where ID_Visualizzation in (select ID from visualizzation where ID_Test_Padre = ?)")) {
+         $del_stmt->bind_param('i', $idTest);
+         $del_stmt->execute();
+         //elimino le pagine
+         if ($del_stmt = $this->db->prepare("DELETE from visualizzation where ID_Test_Padre = ?")) {
+            $del_stmt->bind_param('i', $idTest);
+            $del_stmt->execute();
+            //elimino il test
+            if ($del_stmt = $this->db->prepare("DELETE from test where ID = ?")) {
+               $del_stmt->bind_param('i', $idTest);
+             
+               return   $del_stmt->execute();
+            }
+            return false;
+         }
+         return false;
+      }
+      return false;
+   }
 }
-
-
 ?>
