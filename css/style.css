@@ -112,3 +112,8 @@ footer {
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
   }
+
+input[type=range] {
+    margin: 0 auto;
+    width: 50% !important;
+}

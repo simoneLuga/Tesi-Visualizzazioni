@@ -1,13 +1,20 @@
 const main = document.getElementById("feed");
 var wrapperListCreateTest = 1;
-var wrapperListVisualizzaTest = 1;
-var wrapperListVisualizzaPagine = 1;
+
 var wrapperListVisualizzaUser = 1;
+const buttonsWithSwitchClass = document.querySelectorAll("button.switch");
 
+function switchButton(e){
+    buttonsWithSwitchClass.forEach((btn) => {
+        btn.classList.remove("active");
+    });
+    e.classList.add("active");
+}
 
-function showTestConfigurazione() {
+function showTestConfigurazione(e) {
+    switchButton(e)
     window.onscroll = null;
-    axios.post("../php/api/api_test_Configurazione.php"
+    axios.post("../api/api_test_Configurazione.php"
     ).then(response => {
         main.innerHTML = response.data;
     });
@@ -30,9 +37,10 @@ function stopConf(){
     window.location.reload()
 }
 
-function showStorico() {
+function showStorico(e) {
+    switchButton(e)
     window.onscroll = null;
-    axios.post("../php/api/api_storico.php"
+    axios.post("../api/api_storico.php"
     ).then(response => {
         main.innerHTML = response.data;
         wrapperListVisualizzaTest = document.querySelector(".wrapperVisualizzaTest");
@@ -42,9 +50,10 @@ function showStorico() {
     });
 }
 
-function showCreaTest() {
+function showCreaTest(e) {
+    switchButton(e)
     window.onscroll = null;
-    axios.post("../php/api/api_crea_test.php"
+    axios.post("../api/api_crea_test.php"
     ).then(response => {
         main.innerHTML = response.data;
         const dragArea = document.querySelector(".wrapper");
@@ -56,33 +65,9 @@ function showCreaTest() {
     document.getElementById("btn_creaTest").classList.add="active";
 }
 
-function showVisualizzaTest() {
-    window.onscroll = null;
-    axios.post("../php/api/api_visualizza_test.php"
-    ).then(response => {
-        main.innerHTML = response.data;
-        wrapperListVisualizzaTest = document.querySelector(".wrapperVisualizzaTest");
-        wrapperListVisualizzaPagine = document.querySelector(".wrapperVisualizzaPagine");
-    });
-};
 
-function openPageCreate(element){
-    for (var i = 0; i < wrapperListCreateTest.childNodes.length; i++) {
-        if( wrapperListCreateTest.childNodes[i].tagName == "DIV" )
-            wrapperListCreateTest.childNodes[i].style.border = "none";
-    }
-    element.style.border = "1px solid #222529";
-    element.style.borderRadius = "4px";
-}
 
-function openPageTest(element){
-    for (var i = 0; i < wrapperListVisualizzaTest.childNodes.length; i++) {
-        if( wrapperListVisualizzaTest.childNodes[i].tagName == "DIV" )
-        wrapperListVisualizzaTest.childNodes[i].style.border = "none";
-    }
-    element.style.border = "1px solid #222529";
-    element.style.borderRadius = "4px";
-}
+
 
 function openPageUser(element){
     for (var i = 0; i < wrapperListVisualizzaUser.childNodes.length; i++) {
@@ -93,11 +78,3 @@ function openPageUser(element){
     element.style.borderRadius = "4px";
 }
 
-function openPagePage(element){
-    for (var i = 0; i < wrapperListVisualizzaPagine.childNodes.length; i++) {
-        if( wrapperListVisualizzaPagine.childNodes[i].tagName == "DIV" )
-        wrapperListVisualizzaPagine.childNodes[i].style.border = "none";
-    }
-    element.style.border = "1px solid #222529";
-    element.style.borderRadius = "4px";
-}

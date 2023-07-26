@@ -1,35 +1,16 @@
-function checkRadio(e){
-    if (e == document.getElementById("btnradioTester")){
-        document.getElementById("inputPass").disabled = true
-    }
-    else
-    {
-        document.getElementById("inputPass").disabled = false
-    }
-}
 
 document.querySelector("form").addEventListener("submit", function (event) {
     event.preventDefault();
-    const nome = document.querySelector("#uname").value;
-    const cognome = document.querySelector("#usurname").value;
-
-    var checkRadio = document.querySelector(
-        'input[name="btnradio"]:checked');
-    const type = checkRadio.value;
-    const password = null;
-    if(type != "T"){
-        password = document.querySelector("#inputPass").value;
-    }
-    document.querySelector("#password").value = "";
-    login(nome, cognome, type,password);
+    const email = document.querySelector("#email").value;
+    const password = document.querySelector("#inputPass").value;
+    document.querySelector("#inputPass").value = "";
+    login(email,password);
 });
 
-function login(nome,cognome,type,password){
+function login(email,password){
 
     const formData = new FormData();
-    formData.append('nome', nome);
-    formData.append('cognome', cognome);
-    formData.append('type', type);
+    formData.append('email', email);
     formData.append('password', password); //invio cryptato della password 
 
     axios.post('../php/api/api_login.php', formData).then(response => {    

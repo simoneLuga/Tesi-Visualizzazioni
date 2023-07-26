@@ -2,13 +2,10 @@
 require_once 'bootstrap.php';
 
 $result["logineseguito"] = false;
-if(isset($_POST['nome'],$_POST['cognome'],$_POST['type'], $_POST['password'])) { 
-
-    $nome = $_POST['nome'];
-    $cognome = $_POST['cognome'];
-    $type = $_POST['type'];
+if(isset($_POST['email'], $_POST['password'])) { 
+    $email = $_POST['email'];
     $password = $_POST['password']; // Recupero la password criptata.
-    if($dbh->login($nome,$cognome, $type, $password) == true) {
+    if($dbh->login($email, $password) == true) {
       //Login eseguito
        $result["logineseguito"] = true;
     } else {

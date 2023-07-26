@@ -23,9 +23,9 @@ create table Registrazione (
      Momento date not null,
      Coordinata_X float(1) not null,
      Coordinata_Y float(1) not null,
-     ID_Utente int not null,
+     IndexUtenteAnonimo int not null,
      ID_Visualizzation int not null,
-     PRIMARY KEY (Momento));
+     constraint IDRegistrazione primary key (Momento, IndexUtenteAnonimo));
 
 create table Test (
      Nome varchar(50)  not null,
@@ -34,11 +34,10 @@ create table Test (
      primary key (ID));
 
 create table Utente (
-     Nome varchar(30)  not null,
-     Cognome varchar(30) not null,
-     ID int not null AUTO_INCREMENT,
-     Pass varchar(30),
-     TypeUser char(1) not null,
+	 ID int not null AUTO_INCREMENT,
+     Email varchar(50)  not null,
+     Pass varchar(30),	
+     typeUser char(1) not null,
      primary key (ID));
 
 create table Visualizzation (
@@ -51,10 +50,6 @@ create table Visualizzation (
 
 -- Constraints Section
 -- ___________________ 
-
-alter table Registrazione add constraint FKRegistra
-     foreign key (ID_Utente)
-     references Utente (ID);
 
 alter table Registrazione add constraint FKCosa
      foreign key (ID_Visualizzation)

@@ -1,3 +1,3 @@
 <?php
-    require '../crea_test.php';
+    require '../page/crea_test.php';
 ?>

@@ -1,3 +1,3 @@
 <?php
-    require '../storico.php';
+    require '../page/storico.php';
 ?>

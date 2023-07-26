@@ -25,30 +25,14 @@
   <div id="feed">
     <form action="action_page.php" method="post">
       <div class="imgcontainer">
-      <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-            <input type="radio" class="btn-check" name="btnradio" value="A" id="btnradio1" autocomplete="off" onclick="checkRadio(this)">
-            <label class="btn btn-outline-dark" for="btnradio1">Admin</label>
+        <div class="container">
+          <label for="email"><b>email</b></label>
+          <input type="text" placeholder="Enter email" name="email" id="email" required>
+          <label id="labelPass" for="psw"><b>Password</b></label>
+          <input id="inputPass" type="password" placeholder="Enter Password" name="psw" required>
 
-            <input type="radio" class="btn-check" name="btnradio" value="C" id="btnradio2" autocomplete="off" onclick="checkRadio(this)">
-            <label class="btn btn-outline-dark" for="btnradio2">Creator</label>
-
-            <input type="radio" class="btn-check" name="btnradio" id="btnradioTester" value="T" autocomplete="off" onclick="checkRadio(this)" checked>
-            <label class="btn btn-outline-dark" for="btnradioTester">Tester-user</label>
-          </div>
-      </div>
-
-      <div class="container">
-        <label for="uname"><b>Nome</b></label>
-        <input type="text" placeholder="Enter Username" name="uname" id="uname" required>
-
-        <label for="uname"><b>Cognome</b></label>
-        <input type="text" placeholder="Enter Surname" name="usurname" id="usurname" equired>
-
-        <label id="labelPass" for="psw"><b>Password</b></label>
-        <input  id="inputPass" type="password" placeholder="Enter Password" name="psw"  disabled>
-
-        <button type="submit" class="btn btn-outline-dark">Login</button>
-      </div>
+          <button type="submit" class="btn btn-outline-dark">Login</button>
+        </div>
     </form>
   </div>
 

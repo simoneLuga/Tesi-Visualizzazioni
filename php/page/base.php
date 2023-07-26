@@ -10,7 +10,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.0/Sortable.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-
 </head>
 
 <body>
@@ -23,25 +22,25 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <button class="nav-link" onclick="showVisualizzaTest()"
+                        <button class="nav-link switch" onclick="showVisualizzaTest(this)"
                             aria-label="button test configurazione">Visualizza Test</button>
                     </li>
-                    <li class="nav-item">
-                        <button id="btn_creaTest" class="nav-link" onclick="showCreaTest()"
+                    <li class="nav-item"> 
+                        <button class="nav-link switch" onclick="showCreaTest(this)"
                             aria-label="button test configurazione">Crea test</button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link" onclick="showStorico()"
+                        <button class="nav-link switch" onclick="showStorico(this)"
                             aria-label="button test configurazione">Storico</button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link" onclick="showTestConfigurazione()"
+                        <button class="nav-link switch" onclick="showTestConfigurazione(this)"
                             aria-label="button test configurazione">Test configurazione</button>
                     </li>
                 </ul>
             </div>
-            <div class="d-flex">
-                SImone
+            <div class="navbar-brand d-flex" id="div_utente" >
+                Tester
             </div>
         </div>
     </nav>
@@ -55,9 +54,11 @@
     <footer>
         Simone Lugaresi &copy 2023 Tesi-visualizzation
     </footer>
-    <script src="../js/base.js"></script>
-    <script src="../js/webgazer.js" type="text/javascript"></script>
-    <link rel="stylesheet" href="../css/style.css" type="text/css">
+    <script src="../../js/base.js"></script>
+    <script src="../../js/crea.js"></script>
+    <script src="../../js/visualizza.js"></script>
+    <script src="../../js/webgazer.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="../../css/style.css" type="text/css">
 </body>
 
 </html>
