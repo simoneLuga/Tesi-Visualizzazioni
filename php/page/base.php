@@ -56,6 +56,7 @@
     </footer>
     <script src="../../js/base.js"></script>
     <script src="../../js/crea.js"></script>
+    <script src="../../js/storico.js"></script>
     <script src="../../js/visualizza.js"></script>
     <script src="../../js/webgazer.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../../css/style.css" type="text/css">

@@ -59,6 +59,11 @@
     overflow: hidden;
     overflow-y: scroll;
 }
+.wrapperVisualizzaTestStorico, .wrapperVisualizzaPagineStorico, .wrapperVisualizzaUserStorico{
+    height: 87vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
 
 
 .responsive {

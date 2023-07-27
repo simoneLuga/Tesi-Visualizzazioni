@@ -37,18 +37,6 @@ function stopConf(){
     window.location.reload()
 }
 
-function showStorico(e) {
-    switchButton(e)
-    window.onscroll = null;
-    axios.post("../api/api_storico.php"
-    ).then(response => {
-        main.innerHTML = response.data;
-        wrapperListVisualizzaTest = document.querySelector(".wrapperVisualizzaTest");
-        wrapperListVisualizzaUser = document.querySelector(".wrapperVisualizzaUser");
-        wrapperListVisualizzaPagine = document.querySelector(".wrapperVisualizzaPagine");
-
-    });
-}
 
 
 

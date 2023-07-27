@@ -64,11 +64,18 @@ class DatabaseHelper
       }
    }
 
+   public function get_registrazioni_test($idPage){
+      if ($stmt = $this->db->prepare("SELECT * from registrazione as r where r.ID_Visualizzation = ?")) {
+         $stmt->bind_param('i', $idPage);
+         $stmt->execute();
+         $result = $stmt->get_result();
+         return $result->fetch_all(MYSQLI_ASSOC);
+      }
+   }
+
    public function get_all_test()
    {
-      if (
-         $stmt = $this->db->prepare("SELECT * from test as t")
-      ) {
+      if ($stmt = $this->db->prepare("SELECT * from test as t")) {
          $stmt->execute();
          $result = $stmt->get_result();
          return $result->fetch_all(MYSQLI_ASSOC);
@@ -86,7 +93,7 @@ class DatabaseHelper
    }
 
    //da rivedere
-   public function save_test_X($idUtente, $idVisualizzation, $cor_x, $cor_y)
+   public function save_test_X($idVisualizzation, $cor_x, $cor_y)
    {
       $momento = time();
       if ($stmt = $this->db->prepare("INSERT INTO registrazione(Momento, Coordinata_X, Coordinata_Y, ID_utente, ID_Visualizzation) VALUES (?, ?, ?, ?, ?)")) {

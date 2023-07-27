@@ -37,7 +37,7 @@ function caricaPagine(idTest){
         pagineTestArrayVisualizza.forEach(function (tripla, index) {
             tripla.id = index;
             var element = "<div class='item row m-1' style='width: 90%;' id=" + tripla.id + " onclick='openPagePage(this)'>\
-            <span class='col-12' style='margin-top: 8px; text-align: center;'>Pagina "+ index + "</span>\
+            <span class='col-12' style='text-align: center;'>Pagina "+ index + "</span>\
             </div>";
             wrapperListVisualizzaPagine.innerHTML += element;
             index++;
