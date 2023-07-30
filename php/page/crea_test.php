@@ -8,13 +8,7 @@
                 <div class="col-2">
                     <input type="text" id="inputTitle" class="form-control" onchange="changeTitleTest(this)">
                 </div>
-                <div class="col-2 offset-2">
-                    <label for="inputPathTest" class="col-form-label">Link condivisibile</label>
-                </div>
-                <div class="col-2">
-                    <input type="text" id="inputPathTest" class="form-control" disabled placeholder="link..">
-                </div>
-                <div class="d-grid offset-1 col-10 ">
+                <div class="d-grid col-6 offset-1">
                     <button type="button" class="btn btn-outline-dark" onclick="saveNewTest()">SALVA</button>
                 </div>
             </div>
