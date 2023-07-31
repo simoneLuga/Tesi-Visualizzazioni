@@ -10,7 +10,7 @@ function showStorico(e) {
     axios.post("../api/api_storico.php"
     ).then(response => {
         main.innerHTML = response.data;
-        disabledConsole(false,false);
+        consoleHideSwitch(true);
         wrapperListVisualizzaTestStorico = document.querySelector(".wrapperVisualizzaTestStorico");
         wrapperListVisualizzaUserStorico = document.querySelector(".wrapperVisualizzaUserStorico");
         wrapperListVisualizzaPagineStorico = document.querySelector(".wrapperVisualizzaPagineStorico");
@@ -50,11 +50,11 @@ function caricaStoricoUser(idPage) {
     wrapperListVisualizzaUserStorico.innerHTML = "";
     const formData = new FormData();
     formData.append("idPage", idPage);
-    axios.post("../api/api_get_registrazioniPage.php", formData
+    axios.post("../api/api_get_anonymous_user.php", formData
     ).then(response => {
         registrazioniPage = response.data;
         registrazioniPage.forEach(function (row, index) {
-            var element = "<div class='item row m-1' id=" + row.IndexUtenteAnonimo + " style='height: 35px' onclick='openPageUserStorico(this)'>\
+            var element = "<div class='item row m-1' id=" + row.IndexUtenteAnonimo + " style='height: 37px' onclick='openPageUserStorico(this)'>\
                 <span class='col-12 p-1' style='text-align: center;''>Utente "+ (index + 1) + "</span>\
                 </div>";
             wrapperListVisualizzaUserStorico.innerHTML += element;
@@ -70,7 +70,7 @@ function caricaPagineStorico(idTest) {
     ).then(response => {
         pagineTestArrayStorico = response.data;
         pagineTestArrayStorico.forEach(function (tripla, index) {
-            var element = " <div class='item row m-1' id="+ index +" style='height: 35px;'  onclick='openPageStorico(this)'>\
+            var element = " <div class='item row m-1' id=" + index + " style='height: 37px;'  onclick='openPageStorico(this)'>\
                                 <span class='col-12 p-1' style='text-align: center;'>Pagina "+ (index + 1) + "</span>\
                             </div>";
             wrapperListVisualizzaPagineStorico.innerHTML += element;
@@ -79,12 +79,12 @@ function caricaPagineStorico(idTest) {
 }
 
 function openPageUserStorico(element) {
-/*     for (var i = 0; i < wrapperListVisualizzaUserStorico.childNodes.length; i++) {
-        if (wrapperListVisualizzaUserStorico.childNodes[i].tagName == "DIV")
-            wrapperListVisualizzaUserStorico.childNodes[i].style.border = "none";
-    }
-    element.style.border = "1px solid #222529";
-    element.style.borderRadius = "4px"; */
+    /*     for (var i = 0; i < wrapperListVisualizzaUserStorico.childNodes.length; i++) {
+            if (wrapperListVisualizzaUserStorico.childNodes[i].tagName == "DIV")
+                wrapperListVisualizzaUserStorico.childNodes[i].style.border = "none";
+        }
+        element.style.border = "1px solid #222529";
+        element.style.borderRadius = "4px"; */
 
     var idUtenteAnonimo = element.id;
     const formData = new FormData();
@@ -93,8 +93,7 @@ function openPageUserStorico(element) {
     axios.post("../api/api_storico_risultati.php", formData
     ).then(response => {
         main.innerHTML = response.data;
-        disabledConsole(true,true);
-        checkRisultati = true;
+        consoleHideSwitch(false);
     });
 }
 
@@ -113,4 +112,8 @@ function delTest(idTest) {
 
         });
     });
+}
+
+function eseguiTest(idTest) {
+    window.location.href = `../api/api_esegui_test.php?idTest=${idTest}`;
 }

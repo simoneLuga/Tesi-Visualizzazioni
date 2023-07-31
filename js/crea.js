@@ -10,7 +10,7 @@ function showCreaTest(e) {
     axios.post("../api/api_crea_test.php"
     ).then(response => {
         main.innerHTML = response.data;
-        disabledConsole(false,false);
+        consoleHideSwitch(true);
         const dragArea = document.querySelector(".wrapper");
         new Sortable(dragArea,{
             animation: 350

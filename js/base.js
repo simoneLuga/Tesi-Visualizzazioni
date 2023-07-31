@@ -1,14 +1,13 @@
 const main = document.getElementById("feed");
 var wrapperListCreateTest = 1;
 const div_console = document.getElementById("div_console");
-var checkRisultati = false;
 
-var inp_range = document.getElementById("customRange1");
 var inp_check = document.getElementById("btn-check");
 var btn_forward = document.getElementById("btn_forward");
 var btn_backward = document.getElementById("btn_backward");
 
 var wrapperListVisualizzaUser = 1;
+
 const buttonsWithSwitchClass = document.querySelectorAll("button.switch");
 
 function switchButton(e){
@@ -18,11 +17,11 @@ function switchButton(e){
     e.classList.add("active");
 }
 
-function disabledConsole(page, heatmap){
-    if(page){
-        div_console.disabled = false;
-        inp_range.disabled = heatmap? false: true;
-        inp_check.disabled = heatmap? false: true;
+function consoleHideSwitch(hidden){
+    if(hidden){
+        div_console.style.visibility = "hidden";
+    }else{
+        div_console.style.visibility = "visible";
     }
 }
 
@@ -32,7 +31,7 @@ function showTestConfigurazione(e) {
     axios.post("../api/api_test_Configurazione.php"
     ).then(response => {
         main.innerHTML = response.data;
-        disabledConsole(false,false);
+        consoleHideSwitch(true);
     });
 }
 

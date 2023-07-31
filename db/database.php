@@ -41,6 +41,17 @@ class DatabaseHelper
       }
    }
 
+   public function get_all_anonymous_users($id_page){
+      if (
+         $stmt = $this->db->prepare("SELECT distinct(IndexUtenteAnonimo) FROM registrazione where ID_Visualizzation = ?")
+      ) {
+         $stmt->bind_param('i', $id_page);
+         $stmt->execute();
+         $result = $stmt->get_result();
+         return $result->fetch_all(MYSQLI_ASSOC);
+      }
+   }
+
    //da rivedere
    public function get_test_creator()
    {
@@ -64,9 +75,9 @@ class DatabaseHelper
       }
    }
 
-   public function get_registrazioni_test($idPage){
-      if ($stmt = $this->db->prepare("SELECT * from registrazione as r where r.ID_Visualizzation = ?")) {
-         $stmt->bind_param('i', $idPage);
+   public function get_registrazioni_test($idPage, $idUtente){
+      if ($stmt = $this->db->prepare("SELECT Momento as 'time', Coordinata_X as x, Coordinata_Y as y from registrazione as r where r.ID_Visualizzation = ? and r.IndexUtenteAnonimo = ? order by Momento asc")) {
+         $stmt->bind_param('is', $idPage, $idUtente);
          $stmt->execute();
          $result = $stmt->get_result();
          return $result->fetch_all(MYSQLI_ASSOC);
@@ -82,22 +93,13 @@ class DatabaseHelper
       }
    }
 
-   public function get_history($idVisualizzation)
-   {
-      if ($stmt = $this->db->prepare("SELECT * from registrazione as r where r.ID_Visualizzation = ? order by Momento asc")) {
-         $stmt->bind_param('i', $idVisualizzation);
-         $stmt->execute();
-         $result = $stmt->get_result();
-         return $result->fetch_all(MYSQLI_ASSOC);
-      }
-   }
 
    //da rivedere
-   public function save_test_X($idVisualizzation, $cor_x, $cor_y)
+   public function save_test_X($idVisualizzation, $coor_x, $coor_y, $uuid)
    {
       $momento = time();
-      if ($stmt = $this->db->prepare("INSERT INTO registrazione(Momento, Coordinata_X, Coordinata_Y, ID_utente, ID_Visualizzation) VALUES (?, ?, ?, ?, ?)")) {
-         $stmt->bind_param('iffii', $momento, $cor_x, $cor_y, $idUtente, $idVisualizzation);
+      if ($stmt = $this->db->prepare("INSERT INTO registrazione(Momento, Coordinata_X, Coordinata_Y, IndexUtenteAnonimo, ID_Visualizzation) VALUES (CURTIME(3), ?, ?, ?, ?)")) {
+         $stmt->bind_param('ddsi', $coor_x, $coor_y, $uuid, $idVisualizzation);
          // Eseguo la query ottenuta.
          return $stmt->execute();
       }
