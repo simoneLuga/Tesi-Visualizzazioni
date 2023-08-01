@@ -14,7 +14,8 @@
 </head>
 
 <body>
-<!--     <?php session_start(); echo $_SESSION['IdUtente']?> -->
+    <!--     <?php session_start();
+    echo $_SESSION['IdUtente'] ?> -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand">Visualizzation</a>
@@ -36,19 +37,20 @@
                             aria-label="button test ">test webgazer</button>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link switch" onclick="logout()"
-                            aria-label="button test ">logout</button>
+                        <button class="nav-link switch" onclick="logout()" aria-label="button test ">logout</button>
                     </li>
                 </ul>
             </div>
-            <fieldset class="d-flex row" id="div_console" style="color: #9B9D9E; visibility: hidden;" >
-                    <input type="checkbox" class="btn-check" id="btn-check" onchange="btn_checkFunc(this)">
-                    <label class=" col-4 btn btn-secondary btnMoveCarosel p-1 btn-sm m-1" id="label-textCheck" for="btn-check">LINE</label>
-                <button type="button" class="col-2 btn btn-secondary btn-sm btnMoveCarosel m-1" id="btn_backward" onclick="backward()"><i
-                        class="fa-solid fa-arrow-left"></i></button>
-                <button type="button" class="col-2 btn btn-secondary btn-sm btnMoveCarosel m-1" id="btn_forward" onclick="forward()"><i
-                        class="fa-solid fa-arrow-right"></i></button>
-            </fieldset >
+            <fieldset class="d-flex row" id="div_console" style="color: #9B9D9E; visibility: hidden;">
+
+                <button type="button" class=" col-4 btn btn-secondary btnMoveCarosel p-1 btn-sm m-1"
+                    onclick="btn_checkFunc(this)" id="btn_lineDotSwitch">LINE</button>
+
+                <button type="button" class="col-2 btn btn-secondary btn-sm btnMoveCarosel m-1" id="btn_backward"
+                    onclick="backward()"><i class="fa-solid fa-arrow-left"></i></button>
+                <button type="button" class="col-2 btn btn-secondary btn-sm btnMoveCarosel m-1" id="btn_forward"
+                    onclick="forward()"><i class="fa-solid fa-arrow-right"></i></button>
+            </fieldset>
         </div>
     </nav>
 
@@ -67,7 +69,7 @@
     <script src="../../js/risultati.js"></script>
     <script src="../../js/webgazer.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../../css/style.css" type="text/css">
-    
+
 </body>
 
 </html>

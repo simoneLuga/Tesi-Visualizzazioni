@@ -4,6 +4,8 @@ var heatmapInstance;
 var registrazioniPage;
 var page;
 
+var listUtenti;
+
 function showStorico(e) {
     switchButton(e)
     window.onscroll = null;
@@ -59,6 +61,7 @@ function caricaStoricoUser(idPage) {
                 </div>";
             wrapperListVisualizzaUserStorico.innerHTML += element;
         });
+        listUtenti = registrazioniPage;
     });
 }
 
@@ -79,13 +82,6 @@ function caricaPagineStorico(idTest) {
 }
 
 function openPageUserStorico(element) {
-    /*     for (var i = 0; i < wrapperListVisualizzaUserStorico.childNodes.length; i++) {
-            if (wrapperListVisualizzaUserStorico.childNodes[i].tagName == "DIV")
-                wrapperListVisualizzaUserStorico.childNodes[i].style.border = "none";
-        }
-        element.style.border = "1px solid #222529";
-        element.style.borderRadius = "4px"; */
-
     var idUtenteAnonimo = element.id;
     const formData = new FormData();
     formData.append("page", JSON.stringify(page));
@@ -109,7 +105,6 @@ function delTest(idTest) {
             wrapperListVisualizzaTestStorico = document.querySelector(".wrapperVisualizzaTestStorico");
             wrapperListVisualizzaUserStorico = document.querySelector(".wrapperVisualizzaUserStorico");
             wrapperListVisualizzaPagineStorico = document.querySelector(".wrapperVisualizzaPagineStorico");
-
         });
     });
 }

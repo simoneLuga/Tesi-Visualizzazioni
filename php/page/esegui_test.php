@@ -12,8 +12,6 @@
 </head>
 
 <body>
-    <!--     <?php session_start();
-    echo $_SESSION['IdUtente'] ?> -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid">
             <a class="navbar-brand">Visualizzation</a>

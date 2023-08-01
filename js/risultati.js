@@ -4,35 +4,34 @@ function onloadIframeResult(e) {
     document.getElementById("preview").style.height = e.style.height;
 }
 
-function onloadImg(e){
+function onloadImg(e) {
     document.querySelector('.heatmap').style.height = e.height + 'px';
 }
- 
-function btn_checkFunc(e){
-    if(document.getElementById('page').tagName == 'IMG'){
+
+function btn_checkFunc(e) {
+    if (document.getElementById('page').tagName == 'IMG') {
         onloadImg(document.getElementById('page'));
-    }else{
+    } else {
         onloadIframeResult(document.getElementById('page'));
     }
-    
-    if (e.checked) {
-        document.getElementById('label-textCheck').innerHTML="LINE";
+
+    if (e.innerHTML == "DOT") {
+        e.innerHTML = "LINE";
         loadHeatMap();
     }
     else {
-        document.getElementById('label-textCheck').innerHTML="DOT";
+        e.innerHTML = "DOT";
         loadLineMap();
     }
 }
 
-function trasformaFromPercentuale(x,y, rect){
+function trasformaFromPercentuale(x, y, rect) {
     xReal = (x * parseFloat(rect.width)) / 100;
     yReal = (y * parseFloat(rect.height)) / 100;
     return { x: xReal, y: yReal };
 }
 
 function loadHeatMap() {
-
     document.querySelector('.heatmap').style.position = "relative";
     document.querySelector('.heatmap').innerHTML = "";
     heatmapInstance = h337.create({
@@ -42,8 +41,6 @@ function loadHeatMap() {
     document.querySelector('.heatmap').style.position = "absolute";
 
     //get data
-
-
     const formData = new FormData();
     formData.append("idPage", +document.getElementById("idPagina").innerHTML);
     formData.append("IDUtenteAnonimo", document.getElementById("idUtenteAnonimo").innerHTML);
@@ -54,7 +51,7 @@ function loadHeatMap() {
 
         registrazione = response.data;
         registrazione.forEach(coordianta => {
-            RealCoordiante = trasformaFromPercentuale(coordianta.x,coordianta.y,heatmapInstance._renderer.canvas);
+            RealCoordiante = trasformaFromPercentuale(coordianta.x, coordianta.y, heatmapInstance._renderer.canvas);
             var point = {
                 x: RealCoordiante.x,
                 y: RealCoordiante.y,
@@ -74,7 +71,7 @@ function loadHeatMap() {
     });
 }
 
-function loadLineMap(){
+function loadLineMap() {
 
     const ctx = document.querySelector(".heatmap-canvas").getContext('2d');
 
@@ -91,7 +88,7 @@ function loadLineMap(){
 
         registrazione = response.data;
         registrazione.forEach(coordianta => {
-            RealCoordiante = trasformaFromPercentuale(coordianta.x,coordianta.y, document.querySelector(".heatmap-canvas"));
+            RealCoordiante = trasformaFromPercentuale(coordianta.x, coordianta.y, document.querySelector(".heatmap-canvas"));
             ctx.lineTo(RealCoordiante.x, RealCoordiante.y);
         });
 
@@ -99,12 +96,41 @@ function loadLineMap(){
     });
 }
 
-function backward(){
-    var idPage =  document.getElementById("idPagina").innerHTML;
+function backward() {
     var uuid = document.getElementById("idUtenteAnonimo").innerHTML;
-    
-}
-function forward(){
 
+    var index = listUtenti.findIndex(item => item.IndexUtenteAnonimo === uuid);
+
+    if (index-1 >= 0) {
+        index--;
+        document.getElementById("btn_lineDotSwitch").innerHTML = "LINE";
+        const formData = new FormData();
+        formData.append("page", JSON.stringify(page));
+        formData.append("idUtenteAnonimo", listUtenti[index].IndexUtenteAnonimo);
+        axios.post("../api/api_storico_risultati.php", formData
+        ).then(response => {
+            main.innerHTML = response.data;
+            consoleHideSwitch(false);
+        });
+    }
+
+}
+function forward() {
+    var uuid = document.getElementById("idUtenteAnonimo").innerHTML;
+
+    var index = listUtenti.findIndex(item => item.IndexUtenteAnonimo === uuid);
+
+    if (listUtenti.length > index + 1) {
+        index++;
+        document.getElementById("btn_lineDotSwitch").innerHTML = "LINE";
+        const formData = new FormData();
+        formData.append("page", JSON.stringify(page));
+        formData.append("idUtenteAnonimo", listUtenti[index].IndexUtenteAnonimo);
+        axios.post("../api/api_storico_risultati.php", formData
+        ).then(response => {
+            main.innerHTML = response.data;
+            consoleHideSwitch(false);
+        });
+    }
 }
 

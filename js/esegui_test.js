@@ -109,3 +109,13 @@ function backward() {
 }
 
 
+function stop_reset(e){
+    if(e.innerHTML == "STOP"){
+        e.innerHTML = "START";
+        webgazer.pause();
+    }else{
+        e.innerHTML = "STOP";
+        webgazer.resume();
+    }
+}
+

@@ -16,24 +16,17 @@
 <body>
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-      <a class="navbar-brand">Tesi_Visualizzation</a>
+      <a class="navbar-brand">Visualizzation</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
     </div>
   </nav>
   <div id="feed">
-    <form action="action_page.php" method="post">
-      <div class="imgcontainer">
-        <div class="container">
-          <label for="email"><b>email</b></label>
-          <input type="text" placeholder="Enter email" name="email" id="email" required>
-          <label id="labelPass" for="psw"><b>Password</b></label>
-          <input id="inputPass" type="password" placeholder="Enter Password" name="psw" required>
-
-          <button type="submit" class="btn btn-outline-dark">Login</button>
-        </div>
-    </form>
+        <?php
+          require 'login.php';
+          require 'signin.php';
+        ?>
   </div>
 
   <footer>
@@ -41,7 +34,8 @@
   </footer>
   <script src="../js/login.js"></script>
   <script src="../js/base.js"></script>
-  <script src="../js/webgazer.js" type="text/javascript"></script>
+  <script src="../js/sha512.js"></script>
+
   <link rel="stylesheet" href="../css/style.css" type="text/css">
   <link rel="stylesheet" href="../css/login.css" type="text/css">
 </body>

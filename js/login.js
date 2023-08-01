@@ -1,14 +1,8 @@
 
-document.querySelector("form").addEventListener("submit", function (event) {
-    event.preventDefault();
+function login(){
     const email = document.querySelector("#email").value;
     const password = document.querySelector("#inputPass").value;
     document.querySelector("#inputPass").value = "";
-    login(email,password);
-});
-
-function login(email,password){
-
     const formData = new FormData();
     formData.append('email', email);
     formData.append('password', password); //invio cryptato della password 
@@ -21,4 +15,17 @@ function login(email,password){
             console.log("login errato")
         }
     });
+}
+
+function signin(){
+}
+
+function turnOnSigninForm(){
+    document.getElementById("form_signin").style.display ="inline";
+    document.getElementById("form_login").style.display ="none";
+}
+
+function turnOnLoginForm(){
+    document.getElementById("form_signin").style.display ="none";
+    document.getElementById("form_login").style.display ="inline";
 }
