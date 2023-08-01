@@ -14,14 +14,15 @@ class DatabaseHelper
    public function login($email, $password)
    {
       // Usando statement sql 'prepared' non sarà possibile attuare un attacco di tipo SQL injection.
-      if ($stmt = $this->db->prepare("SELECT * FROM utente WHERE email = ? LIMIT 1")) {
+      if ($stmt = $this->db->prepare("SELECT * FROM utente WHERE Email = ? LIMIT 1")) {
          $stmt->bind_param('s', $email); // esegue il bind del parametro '$email'.
          $stmt->execute(); // esegue la query appena creata.
          $stmt->store_result();
-         $stmt->bind_result($user_id, $email, $pass, $type); // recupera il risultato della query e lo memorizza nelle relative variabili.
+         $stmt->bind_result($user_id, $email, $db_pass, $type, $salt); // recupera il risultato della query e lo memorizza nelle relative variabili.
          $stmt->fetch();
+         $password = hash('sha512', $password.$salt); 
          if ($stmt->num_rows == 1) { // se l'utente esiste
-            if ($pass == $password) {
+            if ($db_pass == $password) {
                $_SESSION["type"] = $type;
                $_SESSION["IdUtente"] = $user_id;
                return true;
@@ -31,6 +32,29 @@ class DatabaseHelper
       }
       return false;
    }
+
+   public function emailIsPresent($email)
+   {
+      if(!isset($email)){return false;}
+      if ($stmt = $this->db->prepare("SELECT * FROM utente WHERE Email = ? LIMIT 1")) {
+         $stmt->bind_param('s', $email); 
+         $stmt->execute(); 
+         $stmt->store_result();
+
+         return $stmt->num_rows == 0 ? false : true;
+      }
+   }
+
+   public function signin($email, $password, $random_salt)
+   {
+      $c = "C";
+      if ($insert_stmt = $this->db->prepare("INSERT INTO Utente (Email, Pass, TypeUser, salt) VALUES (?, ?, ?, ?)")) {
+         $insert_stmt->bind_param('ssss', $email, $password, $c, $random_salt );
+         // Esegui la query ottenuta.
+         return $insert_stmt->execute();
+      }
+   }
+
 
    public function updateimg_view($id_page, $location)
    {
