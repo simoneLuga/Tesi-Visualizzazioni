@@ -22,6 +22,7 @@
       </button>
     </div>
   </nav>
+  <p style="text-align: center; color: red;"><b id="errori"></b></p>
   <div id="feed">
         <?php
           require 'login.php';

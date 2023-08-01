@@ -134,3 +134,13 @@ function forward() {
     }
 }
 
+window.addEventListener('resize', function(){
+    if (document.getElementById('page').tagName == 'IMG') {
+        onloadImg(document.getElementById('page'));
+    } else {
+        onloadIframeResult(document.getElementById('page'));
+    }
+    this.document.getElementById("btn_lineDotSwitch").innerHTML = "LINE";
+    loadHeatMap();
+});
+
