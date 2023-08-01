@@ -27,10 +27,10 @@
                 </ul>
             </div>
             <fieldset class="d-flex row" id="div_console" style="color: #9B9D9E;">
-                <button type="button" class="col-2 offset-9 btn btn-secondary btn-sm btnMoveCarosel m-1" id="btn_backward" onclick="backward()"><i
-                        class="fa-solid fa-arrow-left"></i></button>
-                <button type="button" class="col-2 btn btn-secondary btn-sm btnMoveCarosel m-1" id="btn_forward" onclick="forward()"><i
-                        class="fa-solid fa-arrow-right"></i></button>
+                <button type="button" class="col-2 offset-9 btn btn-secondary btn-sm btnMoveCarosel m-1"
+                    id="btn_backward" onclick="backward()"><i class="fa-solid fa-arrow-left"></i></button>
+                <button type="button" class="col-2 btn btn-secondary btn-sm btnMoveCarosel m-1" id="btn_forward"
+                    onclick="forward()"><i class="fa-solid fa-arrow-right"></i></button>
             </fieldset>
         </div>
     </nav>
@@ -38,15 +38,16 @@
     <div id="feed">
         <div class="row" id="preview">
             <?php
-            if($templateParams['ok']){
-                $pagesArray = json_decode($templateParams['pages'],true);
+            $okVar = json_decode($templateParams['ok'], true);
+            if ($okVar[0]['attivo']) {
+                $pagesArray = json_decode($templateParams['pages'], true);
                 if ($pagesArray[0]['Photo'] != null) {
                     echo "<img class= 'mx-auto d-block responsive col-12' src=../../img/" . $pagesArray[0]['Photo'] . ">";
                 } else {
                     echo "<iframe class= 'mx-auto d-block responsive col-12 '  
                     scrolling = 'no' onload='onloadIframeEsegui(this)' frameborder = '0' src = " . $pagesArray[0]['link'] . "></iframe>";
                 }
-            }else{
+            } else {
                 echo "<div class='d-flex align-items-center justify-content-center'>
                 <div class='text-center'>
                     <h2 class='display-1 fw-bold'>404</h2>
@@ -57,7 +58,8 @@
                 </div>
             </div>";
             }
-                
+
+
             ?>
         </div>
     </div>
@@ -67,7 +69,9 @@
     </footer>
     <script src="../../js/base.js"></script>
     <script>
-        var pagine = <?php echo $templateParams['pages']; ?> ;
+        var pagine = <?php if ($okVar[0]['attivo']) {
+            echo $templateParams['pages'];
+        } ?>;
         var indexPag = 0;
     </script>
     <script src="../../js/esegui_test.js"></script>

@@ -112,3 +112,27 @@ function delTest(idTest) {
 function eseguiTest(idTest) {
     window.location.href = `../api/api_esegui_test.php?idTest=${idTest}`;
 }
+
+function AttivaDisattivaTest(e,idTest){
+    var attivo;
+    if(e.innerHTML == "on"){
+        e.innerHTML = "off";
+        e.classList.remove('btn-success');
+        e.classList.add('btn-danger');
+        attivo = 0;
+    }
+    else{
+        e.innerHTML = "on";
+        e.classList.add('btn-success');
+        e.classList.remove('btn-danger');
+        attivo = 1;
+    }
+    const formData = new FormData();
+    formData.append("idTest", idTest);
+    formData.append("attivo", attivo);
+    axios.post("../api/api_AttivaDisattiva_test.php", formData
+    ).then(response => {
+        console.log(response.data);
+    });
+}
+

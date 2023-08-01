@@ -6,7 +6,7 @@ if (isset($_GET['idTest'])) {
     if($pagine!=null){
         $templateParams['idTest'] = $_GET['idTest'];
         $templateParams['pages'] = json_encode($pagine);
-        $templateParams['ok'] = true;
+        $templateParams['ok'] = json_encode($dbh->get_ifActive($_GET['idTest']));
     }
 }
 require '../page/esegui_test.php';

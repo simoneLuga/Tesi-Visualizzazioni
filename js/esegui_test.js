@@ -32,10 +32,15 @@ function generateUUID() {
 
 document.addEventListener('DOMContentLoaded', function () {
     console.log("CARICAMENTO utente");
-    console.log(pagine);
     generateUUID();
     console.log(uuid);
-    initWebGazer();
+    if(pagine){
+        console.log(pagine);
+        initWebGazer();
+    }else{
+        console.log("pagine non caricate");
+    }
+    
 });
 
 function initWebGazer() {

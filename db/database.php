@@ -99,6 +99,15 @@ class DatabaseHelper
       }
    }
 
+   public function get_ifActive($idTest){
+      if ($stmt = $this->db->prepare("SELECT attivo FROM test WHERE ID = ?")) {
+         $stmt->bind_param('i', $idTest);
+         $stmt->execute();
+         $result = $stmt->get_result();
+         return $result->fetch_all(MYSQLI_ASSOC);
+      }
+   }
+
    public function get_registrazioni_test($idPage, $idUtente){
       if ($stmt = $this->db->prepare("SELECT Momento as 'time', Coordinata_X as x, Coordinata_Y as y from registrazione as r where r.ID_Visualizzation = ? and r.IndexUtenteAnonimo = ? order by Momento asc")) {
          $stmt->bind_param('is', $idPage, $idUtente);
@@ -121,7 +130,6 @@ class DatabaseHelper
    //da rivedere
    public function save_test_X($idVisualizzation, $coor_x, $coor_y, $uuid)
    {
-      $momento = time();
       if ($stmt = $this->db->prepare("INSERT INTO registrazione(Momento, Coordinata_X, Coordinata_Y, IndexUtenteAnonimo, ID_Visualizzation) VALUES (CURTIME(3), ?, ?, ?, ?)")) {
          $stmt->bind_param('ddsi', $coor_x, $coor_y, $uuid, $idVisualizzation);
          // Eseguo la query ottenuta.
@@ -182,6 +190,15 @@ class DatabaseHelper
          return false;
       }
       return false;
+   }
+
+
+   public function AttivaDisattivaTest($idTest, $attivo){
+      if ($stmt = $this->db->prepare("UPDATE test SET attivo = ? WHERE ID = ?")) {
+         $stmt->bind_param('ii', $attivo,$idTest);
+         // Eseguo la query ottenuta.
+         return $stmt->execute();
+      }
    }
 }
 ?>
