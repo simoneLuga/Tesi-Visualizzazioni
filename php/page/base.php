@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tesi_Visualizzation</title>
+    <title>Visualization</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -17,7 +17,7 @@
     echo $_SESSION['IdUtente'] ?> -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand">Visualizzation</a>
+            <a class="navbar-brand">Visualization</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -60,7 +60,7 @@
 
 
     <footer>
-        Simone Lugaresi &copy 2023 Tesi-visualizzation
+        Simone Lugaresi &copy 2023 Tesi-visualization
     </footer>
     <script src="../../js/base.js"></script>
     <script src="../../js/crea.js"></script>
