@@ -27,7 +27,7 @@ function signin(){
     
 /*     console.log(hex_sha512(password1)); */
     //si puo aggiungere il fatto di controllare che la password sia sicura
-    if(password1 == password2){
+    if(password1 == password2 /* && checkPasswordSecurity(password1) */){
         const formData = new FormData();
         formData.append('email', email1);
         formData.append('password', hex_sha512(password1)); //invio cryptato della password 

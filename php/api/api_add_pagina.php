@@ -2,21 +2,21 @@
 require_once 'bootstrap.php';
 
 $result = false;
-if($_SESSION['type']){
+if ($_SESSION['type']) {
     if (isset($_POST['idPadre'], $_POST["type"])) {
         $idPadre = $_POST['idPadre'];
         $type = $_POST["type"];
         if ($type == "photo") {
-    
-            $filename =  $_FILES['src']['name'];
+
+            $filename = $_FILES['src']['name'];
             $extension = pathinfo($filename, PATHINFO_EXTENSION);
             $extension = strtolower($extension);
-            
+
             // Valid extensions
             $valid_ext = array("jpg", "png", "jpeg");
-            
+
             $id_page = $dbh->save_new_visualizzation_noPhoto($idPadre);
-            $location = $_SESSION['IdUtente'] . "_" . $idPadre ."_" . $id_page . "." . $extension;
+            $location = $_SESSION['IdUtente'] . "_" . $idPadre . "_" . $id_page . "." . $extension;
             if (in_array($extension, $valid_ext)) {
                 if (move_uploaded_file($_FILES['src']['tmp_name'], IMG_DIR . $location)) {
                     if ($dbh->updateimg_view($id_page, $location)) {
@@ -25,14 +25,13 @@ if($_SESSION['type']){
                 }
             }
         } else {
-    
-            if($dbh->save_new_visualizzation_link($idPadre, $_POST["src"])){
+
+            if ($dbh->save_new_visualizzation_link($idPadre, $_POST["src"])) {
                 $result = true;
             }
         }
     }
 } else { //non autorizzato
-    header('Content-Type: application/json');
-    echo json_encode("Accesso negato.");
+    header('Location: ../index.php');
 }
 return $result;

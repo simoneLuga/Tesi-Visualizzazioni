@@ -20,7 +20,7 @@ class DatabaseHelper
          $stmt->store_result();
          $stmt->bind_result($user_id, $email, $db_pass, $type, $salt); // recupera il risultato della query e lo memorizza nelle relative variabili.
          $stmt->fetch();
-         $password = hash('sha512', $password.$salt); 
+         $password = hash('sha512', $password . $salt);
          if ($stmt->num_rows == 1) { // se l'utente esiste
             if ($db_pass == $password) {
                $_SESSION["type"] = $type;
@@ -35,10 +35,12 @@ class DatabaseHelper
 
    public function emailIsPresent($email)
    {
-      if(!isset($email)){return false;}
+      if (!isset($email)) {
+         return false;
+      }
       if ($stmt = $this->db->prepare("SELECT * FROM utente WHERE Email = ? LIMIT 1")) {
-         $stmt->bind_param('s', $email); 
-         $stmt->execute(); 
+         $stmt->bind_param('s', $email);
+         $stmt->execute();
          $stmt->store_result();
 
          return $stmt->num_rows == 0 ? false : true;
@@ -49,7 +51,7 @@ class DatabaseHelper
    {
       $c = "C";
       if ($insert_stmt = $this->db->prepare("INSERT INTO Utente (Email, Pass, TypeUser, salt) VALUES (?, ?, ?, ?)")) {
-         $insert_stmt->bind_param('ssss', $email, $password, $c, $random_salt );
+         $insert_stmt->bind_param('ssss', $email, $password, $c, $random_salt);
          // Esegui la query ottenuta.
          return $insert_stmt->execute();
       }
@@ -65,7 +67,8 @@ class DatabaseHelper
       }
    }
 
-   public function get_all_anonymous_users($id_page){
+   public function get_all_anonymous_users($id_page)
+   {
       if (
          $stmt = $this->db->prepare("SELECT distinct(IndexUtenteAnonimo) FROM registrazione where ID_Visualizzation = ?")
       ) {
@@ -99,7 +102,8 @@ class DatabaseHelper
       }
    }
 
-   public function get_ifActive($idTest){
+   public function get_ifActive($idTest)
+   {
       if ($stmt = $this->db->prepare("SELECT attivo FROM test WHERE ID = ?")) {
          $stmt->bind_param('i', $idTest);
          $stmt->execute();
@@ -108,7 +112,8 @@ class DatabaseHelper
       }
    }
 
-   public function get_registrazioni_test($idPage, $idUtente){
+   public function get_registrazioni_test($idPage, $idUtente)
+   {
       if ($stmt = $this->db->prepare("SELECT Momento as 'time', Coordinata_X as x, Coordinata_Y as y from registrazione as r where r.ID_Visualizzation = ? and r.IndexUtenteAnonimo = ? order by Momento asc")) {
          $stmt->bind_param('is', $idPage, $idUtente);
          $stmt->execute();
@@ -143,7 +148,7 @@ class DatabaseHelper
          $stmt->bind_param('si', $titolo, $_SESSION["IdUtente"]);
          // Eseguo la query ottenuta.
          $stmt->execute();
-         return $stmt->insert_id; //return id del test appena caricato
+         return $stmt->insert_id;
       }
    }
 
@@ -175,6 +180,8 @@ class DatabaseHelper
       if ($del_stmt = $this->db->prepare("DELETE from registrazione where ID_Visualizzation in (select ID from visualizzation where ID_Test_Padre = ?)")) {
          $del_stmt->bind_param('i', $idTest);
          $del_stmt->execute();
+         //prima mi faccio gettare le immagini che fanno parte del test cosi da eliminarle anche dal server
+
          //elimino le pagine
          if ($del_stmt = $this->db->prepare("DELETE from visualizzation where ID_Test_Padre = ?")) {
             $del_stmt->bind_param('i', $idTest);
@@ -182,8 +189,8 @@ class DatabaseHelper
             //elimino il test
             if ($del_stmt = $this->db->prepare("DELETE from test where ID = ?")) {
                $del_stmt->bind_param('i', $idTest);
-             
-               return   $del_stmt->execute();
+
+               return $del_stmt->execute();
             }
             return false;
          }
@@ -193,9 +200,10 @@ class DatabaseHelper
    }
 
 
-   public function AttivaDisattivaTest($idTest, $attivo){
+   public function AttivaDisattivaTest($idTest, $attivo)
+   {
       if ($stmt = $this->db->prepare("UPDATE test SET attivo = ? WHERE ID = ?")) {
-         $stmt->bind_param('ii', $attivo,$idTest);
+         $stmt->bind_param('ii', $attivo, $idTest);
          // Eseguo la query ottenuta.
          return $stmt->execute();
       }

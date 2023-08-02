@@ -113,8 +113,7 @@ function backward() {
     }
 }
 
-
-function stop_reset(e){
+/* function stop_reset(e){
     if(e.innerHTML == "STOP"){
         e.innerHTML = "START";
         webgazer.pause();
@@ -122,5 +121,5 @@ function stop_reset(e){
         e.innerHTML = "STOP";
         webgazer.resume();
     }
-}
+} */
 

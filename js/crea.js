@@ -11,20 +11,14 @@ function showCreaTest(e) {
     ).then(response => {
         main.innerHTML = response.data;
         consoleHideSwitch(true);
-        const dragArea = document.querySelector(".wrapper");
-        new Sortable(dragArea,{
-            animation: 350
-        });
         wrapperListCreateTest = document.querySelector(".wrapper");
         pagineTestArray = [];
     });
 }
 
-
 function changeTitleTest(e) {
     titleTest = e.value;
 }
-
 
 function cambia_fotoPage() {
     const input = document.createElement('input');
@@ -108,10 +102,6 @@ function openPageCreate(element) {
     } else {
         preview.innerHTML = " <iframe class= ' mx-auto d-block responsive col-12 ' src = " + tempElement.value + "></iframe>"
     }
-}
-
-function fix(e,src){
-    e.src = src;
 }
 
 function saveNewTest() {

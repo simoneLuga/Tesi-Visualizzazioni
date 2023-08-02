@@ -6,8 +6,6 @@ var inp_check = document.getElementById("btn-check");
 var btn_forward = document.getElementById("btn_forward");
 var btn_backward = document.getElementById("btn_backward");
 
-var wrapperListVisualizzaUser = 1;
-
 const buttonsWithSwitchClass = document.querySelectorAll("button.switch");
 
 function switchButton(e){
@@ -48,20 +46,9 @@ function startConf(){
         console.log("x: " + xprediction + " y: " + yprediction);
     }).begin();
 }
+
 function stopConf(){
     window.location.reload()
-}
-
-
-
-
-function openPageUser(element){
-    for (var i = 0; i < wrapperListVisualizzaUser.childNodes.length; i++) {
-        if( wrapperListVisualizzaUser.childNodes[i].tagName == "DIV" )
-        wrapperListVisualizzaUser.childNodes[i].style.border = "none";
-    }
-    element.style.border = "1px solid #222529";
-    element.style.borderRadius = "4px";
 }
 
 function logout(){

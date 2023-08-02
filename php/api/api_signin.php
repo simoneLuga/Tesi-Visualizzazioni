@@ -25,13 +25,6 @@ if (isset($_POST['email'], $_POST['password'])) {
     $result["erroresignin"] = "Specificare tutti i dati.";
 }
 
-
-
 header('Content-Type: application/json');
 echo json_encode($result);
-
-
-
-
-
 ?>

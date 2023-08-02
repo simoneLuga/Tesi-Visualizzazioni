@@ -33,6 +33,22 @@ function openPageTestStorico(element) {
     caricaPagineStorico(idTest);
 }
 
+function caricaPagineStorico(idTest) {
+    wrapperListVisualizzaPagineStorico.innerHTML = "";
+    const formData = new FormData();
+    formData.append("idTest", idTest);
+    axios.post("../api/api_get_pagineTest.php", formData
+    ).then(response => {
+        pagineTestArrayStorico = response.data;
+        pagineTestArrayStorico.forEach(function (tripla, index) {
+            var element = " <div class='item row m-1' id=" + index + " style='height: 37px;'  onclick='openPageStorico(this)'>\
+                                <span class='col-12 p-1' style='text-align: center;'>Pagina "+ (index + 1) + "</span>\
+                            </div>";
+            wrapperListVisualizzaPagineStorico.innerHTML += element;
+        });
+    });
+}
+
 function openPageStorico(element) {
     for (var i = 0; i < wrapperListVisualizzaPagineStorico.childNodes.length; i++) {
         if (wrapperListVisualizzaPagineStorico.childNodes[i].tagName == "DIV")
@@ -62,22 +78,6 @@ function caricaStoricoUser(idPage) {
             wrapperListVisualizzaUserStorico.innerHTML += element;
         });
         listUtenti = registrazioniPage;
-    });
-}
-
-function caricaPagineStorico(idTest) {
-    wrapperListVisualizzaPagineStorico.innerHTML = "";
-    const formData = new FormData();
-    formData.append("idTest", idTest);
-    axios.post("../api/api_get_pagineTest.php", formData
-    ).then(response => {
-        pagineTestArrayStorico = response.data;
-        pagineTestArrayStorico.forEach(function (tripla, index) {
-            var element = " <div class='item row m-1' id=" + index + " style='height: 37px;'  onclick='openPageStorico(this)'>\
-                                <span class='col-12 p-1' style='text-align: center;'>Pagina "+ (index + 1) + "</span>\
-                            </div>";
-            wrapperListVisualizzaPagineStorico.innerHTML += element;
-        });
     });
 }
 

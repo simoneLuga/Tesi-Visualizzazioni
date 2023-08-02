@@ -64,7 +64,6 @@
     overflow-y: scroll;
 }
 
-
 .responsive {
     width: 100%;
     height: auto;
@@ -90,7 +89,7 @@ footer {
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
 }
 
 
