@@ -88,7 +88,18 @@ class DatabaseHelper
          $stmt->bind_param('i', $_SESSION["IdUtente"]);
          $stmt->execute();
          $result = $stmt->get_result();
-         return $result->fetch_all(MYSQLI_ASSOC);
+         if ($result->num_rows > 0) {
+            // Cicla attraverso i risultati
+            while ($row = $result->fetch_assoc()) {
+               // Accedi al campo "Photo" di ciascuna riga
+               $photo = $row['Photo'];
+
+               // Puoi fare ciò che vuoi con il valore di $photo, ad esempio stamparlo o elaborarlo ulteriormente
+               echo "Nome foto: " . $photo . "<br>";
+            }
+         } else {
+            echo "Nessun risultato trovato.";
+         }
       }
    }
 
@@ -174,14 +185,31 @@ class DatabaseHelper
       }
    }
 
+   public function del_imgfromServer($idTest)
+   {
+      if ($stmt = $this->db->prepare("SELECT Photo from visualizzation where ID_Test_Padre = ?")) {
+         $stmt->bind_param('i', $idTest);
+         $stmt->execute();
+         $result = $stmt->get_result();
+         if ($result->num_rows > 0) {
+            // Cicla attraverso i risultati
+            while ($row = $result->fetch_assoc()) {
+               // Accedi al campo "Photo" di ciascuna riga
+               $photo = $row['Photo'];
+               unlink(IMG_DIR.$photo);
+            }
+         } else {
+            echo "Nessun risultato trovato.";
+         }
+      }
+   }
+
    public function del_test($idTest)
    {
       //elimino le registrazioni
       if ($del_stmt = $this->db->prepare("DELETE from registrazione where ID_Visualizzation in (select ID from visualizzation where ID_Test_Padre = ?)")) {
          $del_stmt->bind_param('i', $idTest);
          $del_stmt->execute();
-         //prima mi faccio gettare le immagini che fanno parte del test cosi da eliminarle anche dal server
-
          //elimino le pagine
          if ($del_stmt = $this->db->prepare("DELETE from visualizzation where ID_Test_Padre = ?")) {
             $del_stmt->bind_param('i', $idTest);

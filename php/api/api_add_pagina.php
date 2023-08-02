@@ -18,7 +18,7 @@ if ($_SESSION['type']) {
             $id_page = $dbh->save_new_visualizzation_noPhoto($idPadre);
             $location = $_SESSION['IdUtente'] . "_" . $idPadre . "_" . $id_page . "." . $extension;
             if (in_array($extension, $valid_ext)) {
-                if (move_uploaded_file($_FILES['src']['tmp_name'], IMG_DIR . $location)) {
+                if (move_uploaded_file($_FILES['src']['tmp_name'], "../../img/" . $location)) {
                     if ($dbh->updateimg_view($id_page, $location)) {
                         $result = true;
                     }
