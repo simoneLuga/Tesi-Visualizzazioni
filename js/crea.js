@@ -97,36 +97,39 @@ function openPageCreate(element) {
     var preview = document.getElementById("preview");
     preview.innerHTML = "";
     if (tempElement.type == "photo") {
-        preview.innerHTML = "<img class= ' mx-auto d-block responsive col-12' src=" + URL.createObjectURL(new Blob([tempElement.value])) +">"
-        
+        preview.innerHTML = "<img class= ' mx-auto d-block responsive col-12' src=" + URL.createObjectURL(new Blob([tempElement.value])) + ">"
+
     } else {
         preview.innerHTML = " <iframe class= ' mx-auto d-block responsive col-12 ' src = " + tempElement.value + "></iframe>"
     }
 }
 
 function saveNewTest() {
-    const formData = new FormData();
-    formData.append("title", titleTest);
-    formData.append("pagineTestArray", JSON.stringify(pagineTestArray));
-    axios.post("../api/api_add_test.php", formData
-    ).then(response => {
-        if (response.data) {
-            const idPadre = response.data;
-            pagineTestArray.forEach(function (tripla) {
-                const formData = new FormData();
-                formData.append("idPadre", idPadre);
-                formData.append("src", tripla.value);
-                formData.append("type", tripla.type);
-                axios.post("../api/api_add_pagina.php", formData).then(response2 => {
-                    console.log(response2.data);
+    if (titleTest != "") {
+        const formData = new FormData();
+        formData.append("title", titleTest);
+        formData.append("pagineTestArray", JSON.stringify(pagineTestArray));
+        axios.post("../api/api_add_test.php", formData
+        ).then(response => {
+            if (response.data) {
+                const idPadre = response.data;
+                pagineTestArray.forEach(function (tripla) {
+                    const formData = new FormData();
+                    formData.append("idPadre", idPadre);
+                    formData.append("src", tripla.value);
+                    formData.append("type", tripla.type);
+                    axios.post("../api/api_add_pagina.php", formData).then(response2 => {
+                        console.log(response2.data);
+                    });
                 });
-            });
-            var wrapper = document.querySelector(".wrapper");
-            wrapper.innerHTML = "";
-            pagineTestArray = [];
-            document.getElementById("inputTitle").value="";
-        } else {
-            console.log("NON done")
-        }
-    });
+                var wrapper = document.querySelector(".wrapper");
+                wrapper.innerHTML = "";
+                pagineTestArray = [];
+                document.getElementById("inputTitle").value = "";
+                titleTest = "";
+            } else {
+                console.log("NON done")
+            }
+        });
+    }
 }
