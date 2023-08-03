@@ -26,7 +26,7 @@ function consoleHideSwitch(hidden){
 function showTestConfigurazione(e) {
     switchButton(e)
     window.onscroll = null;
-    axios.post("../api/api_test_Configurazione.php"
+    axios.post("../api/api_test_configurazione.php"
     ).then(response => {
         main.innerHTML = response.data;
         consoleHideSwitch(true);
