@@ -2,7 +2,7 @@ Create database with sql file: data_visualizzation.sql
 and then create a user:
 
 CREATE USER 'dafault_user'@'localhost' IDENTIFIED BY 'Passtest0.';
-GRANT SELECT, INSERT, UPDATE, DELETE ON `web-socialnetwork`.* TO 'dafault_user'@'localhost';  
+GRANT SELECT, INSERT, UPDATE, DELETE ON `data_visualizzation`.* TO 'dafault_user'@'localhost';  
 
 
 simonelugaresi46@gmail.com; pass-> 1234; Admin
