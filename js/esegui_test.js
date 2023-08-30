@@ -5,6 +5,43 @@ var eyeTrackerRect = eyeTracker.getBoundingClientRect();
 var uuid;
 var webgazer;
 
+var calibrazioneFinita= false;
+
+function calibrazione(e){
+    let val = + e.innerHTML;
+    if(val <= 1){
+        e.classList.remove("btn-secondary");
+        e.classList.add("btn-success");
+        e.innerHTML = "";
+        checkConf();
+    }else{
+        val = val-1;
+        e.innerHTML = val;
+    }
+}
+
+function checkConf(){
+    var bottoni = document.querySelectorAll(".btnConf");
+    ok = true;
+    bottoni.forEach(function(btn) {
+        if(btn.classList.contains("btn-secondary")){
+            ok = false;
+        }
+    });
+    if(ok){
+        console.log("carico la pagina");
+        document.getElementById("div_console").disabled = false;
+        webgazer.pause();
+        if (pagine[indexPag].Photo != null) {
+            document.getElementById("preview").innerHTML = "<img class= 'mx-auto d-block responsive col-12' src=../../img/" + pagine[indexPag].Photo + ">";
+        } else {
+            document.getElementById("preview").innerHTML = "<iframe class= 'mx-auto d-block responsive col-12' scrolling = 'no' onload='onloadIframeEsegui(this)' frameborder = '0' src = " + pagine[indexPag].link + "></iframe>";
+        }
+        webgazer.resume();
+        calibrazioneFinita= true;
+    }
+}
+
 function generateUUID() {
 
     uuid = 'xxxxxxxx-xxxx'.replace(/[xy]/g, function (c) {
@@ -53,24 +90,25 @@ function initWebGazer() {
 
         eyeTrackerRect = eyeTracker.getBoundingClientRect();
 
-        if (x >= eyeTrackerRect.left && x <= eyeTrackerRect.left + eyeTrackerRect.width &&
-            y >= eyeTrackerRect.top && y <= eyeTrackerRect.top + eyeTrackerRect.height) {
-            coords = trasformaPercentuale(x - eyeTrackerRect.left, y - eyeTrackerRect.top);
-            //console.log(coords.x);
-            const formData = new FormData();
-            formData.append("coord_x", coords.x);
-            formData.append("coord_y", coords.y);
-            formData.append("idPage", pagine[indexPag].ID);
-            formData.append("uuid", uuid);
-            axios.post("../api/api_add_coordinate.php", formData
-            ).then(response => {
-                console.log(response.data);
-             });
-        } else {
-            // Il tracciamento è fuori dal quadrato, nascondi il punto di tracciamento degli occhi
-            console.log('nothing');
+        if(calibrazioneFinita){
+            if (x >= eyeTrackerRect.left && x <= eyeTrackerRect.left + eyeTrackerRect.width &&
+                y >= eyeTrackerRect.top && y <= eyeTrackerRect.top + eyeTrackerRect.height) {
+                coords = trasformaPercentuale(x - eyeTrackerRect.left, y - eyeTrackerRect.top);
+                //console.log(coords.x);
+                const formData = new FormData();
+                formData.append("coord_x", coords.x);
+                formData.append("coord_y", coords.y);
+                formData.append("idPage", pagine[indexPag].ID);
+                formData.append("uuid", uuid);
+                axios.post("../api/api_add_coordinate.php", formData
+                ).then(response => {
+                    console.log(response.data);
+                 });
+            } else {
+                // Il tracciamento è fuori dal quadrato, nascondi il punto di tracciamento degli occhi
+                console.log('nothing');
+            }
         }
-
     }).begin();
 }
 
@@ -97,6 +135,8 @@ function forward() {
             document.getElementById("preview").innerHTML = "<iframe class= 'mx-auto d-block responsive col-12' scrolling = 'no' onload='onloadIframeEsegui(this)' frameborder = '0' src = " + pagine[indexPag].link + "></iframe>";
         }
         webgazer.resume();
+    }else{
+        window.location.assign("../page/ultima_pagina.php");
     }
 }
 

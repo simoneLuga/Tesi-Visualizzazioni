@@ -15,6 +15,19 @@ function switchButton(e){
     e.classList.add("active");
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    window.onscroll = null;
+    axios.post("../api/api_storico.php"
+    ).then(response => {
+        main.innerHTML = response.data;
+        consoleHideSwitch(true);
+        wrapperListVisualizzaTestStorico = document.querySelector(".wrapperVisualizzaTestStorico");
+        wrapperListVisualizzaUserStorico = document.querySelector(".wrapperVisualizzaUserStorico");
+        wrapperListVisualizzaPagineStorico = document.querySelector(".wrapperVisualizzaPagineStorico");
+
+    });
+});
+
 function consoleHideSwitch(hidden){
     if(hidden){
         div_console.style.visibility = "hidden";

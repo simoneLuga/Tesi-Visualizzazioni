@@ -24,11 +24,7 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <button class="nav-link switch" id="btn_creaTest" onclick="showCreaTest(this)"
-                            aria-label="button test ">Crea test</button>
-                    </li>
-                    <li class="nav-item">
-                        <button class="nav-link switch" onclick="showStorico(this)"
+                        <button class="nav-link switch active" onclick="showStorico(this)"
                             aria-label="button test ">Statistics</button>
                     </li>
                     <li class="nav-item">

@@ -34,7 +34,6 @@
     Simone Lugaresi &copy 2023 Tesi-visualization
   </footer>
   <script src="../js/login.js"></script>
-  <script src="../js/base.js"></script>
   <script src="../js/sha512.js"></script>
 
   <link rel="stylesheet" href="../css/style.css" type="text/css">

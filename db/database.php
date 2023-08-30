@@ -50,7 +50,7 @@ class DatabaseHelper
    public function signin($email, $password, $random_salt)
    {
       $c = "C";
-      if ($insert_stmt = $this->db->prepare("INSERT INTO Utente (Email, Pass, TypeUser, salt) VALUES (?, ?, ?, ?)")) {
+      if ($insert_stmt = $this->db->prepare("INSERT INTO utente (Email, Pass, TypeUser, salt) VALUES (?, ?, ?, ?)")) {
          $insert_stmt->bind_param('ssss', $email, $password, $c, $random_salt);
          // Esegui la query ottenuta.
          return $insert_stmt->execute();
@@ -90,13 +90,7 @@ class DatabaseHelper
          $result = $stmt->get_result();
          if ($result->num_rows > 0) {
             // Cicla attraverso i risultati
-            while ($row = $result->fetch_assoc()) {
-               // Accedi al campo "Photo" di ciascuna riga
-               $photo = $row['Photo'];
-
-               // Puoi fare ciò che vuoi con il valore di $photo, ad esempio stamparlo o elaborarlo ulteriormente
-               echo "Nome foto: " . $photo . "<br>";
-            }
+            return $result->fetch_all(MYSQLI_ASSOC);
          } else {
             echo "Nessun risultato trovato.";
          }

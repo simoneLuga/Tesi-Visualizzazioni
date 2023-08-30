@@ -4,8 +4,7 @@ var pagineTestArray = [];
 var idDaEliminare = 0;
 var photoOrLink = 0;
 
-function showCreaTest(e) {
-    switchButton(e)
+function showCreaTest() {
     window.onscroll = null;
     axios.post("../api/api_crea_test.php"
     ).then(response => {
@@ -28,7 +27,6 @@ function cambia_fotoPage() {
         temp_fotoPage = e.target.files[0];
         document.getElementById("imgCustom").src = URL.createObjectURL(new Blob([temp_fotoPage]));
     }
-
     input.click();
 }
 
@@ -38,8 +36,8 @@ function caricaIframe() {
 }
 
 function rangeChange(e) {
-    photoOrLink = e.value;
-    if (e.value == 1) {
+    photoOrLink = e;
+    if (e == 1) {
         document.getElementById("divPhoto").style.removeProperty("display");
         document.getElementById("divIframe").style.display = "none";
     } else {
