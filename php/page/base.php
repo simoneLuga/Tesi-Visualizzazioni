@@ -50,10 +50,7 @@
     </nav>
 
 
-    <div id="feed">
-
-    </div>
-
+    <div id="feed"></div>
 
     <footer>
         Simone Lugaresi &copy 2023 Tesi-visualization

@@ -197,6 +197,24 @@ class DatabaseHelper
          }
       }
    }
+   public function del_imgfromServerSinglePage($idPage)
+   {
+      if ($stmt = $this->db->prepare("SELECT Photo from visualizzation where ID = ?")) {
+         $stmt->bind_param('i', $idPage);
+         $stmt->execute();
+         $result = $stmt->get_result();
+         if ($result->num_rows > 0) {
+            // Cicla attraverso i risultati
+            while ($row = $result->fetch_assoc()) {
+               // Accedi al campo "Photo" di ciascuna riga
+               $photo = $row['Photo'];
+               unlink(IMG_DIR.$photo);
+            }
+         } else {
+            echo "Nessun risultato trovato.";
+         }
+      }
+   }
 
    public function del_test($idTest)
    {
@@ -215,6 +233,24 @@ class DatabaseHelper
                return $del_stmt->execute();
             }
             return false;
+         }
+         return false;
+      }
+      return false;
+   }
+
+   public function del_Page($idPage)
+   {
+      //elimino le registrazioni
+      if ($del_stmt = $this->db->prepare("DELETE from registrazione where ID_Visualizzation in (select ID from visualizzation where ID = ?)")) {
+         $del_stmt->bind_param('i', $idPage);
+         $del_stmt->execute();
+         //elimino le pagine
+         if ($del_stmt = $this->db->prepare("DELETE from visualizzation where ID = ?")) {
+            $del_stmt->bind_param('i', $idPage);
+            $del_stmt->execute();
+            //elimino il test
+            return true;
          }
          return false;
       }

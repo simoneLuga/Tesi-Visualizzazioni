@@ -3,12 +3,14 @@ var wrapperListVisualizzaPagineStorico = 1;
 var heatmapInstance;
 var registrazioniPage;
 var page;
+var pagineTestArrayStorico;
 
 var listUtenti;
 
 function showStorico(e) {
+    stopConf()
     switchButton(e)
-    window.onscroll = null;
+/*     window.onscroll = null;
     axios.post("../api/api_storico.php"
     ).then(response => {
         main.innerHTML = response.data;
@@ -17,7 +19,7 @@ function showStorico(e) {
         wrapperListVisualizzaUserStorico = document.querySelector(".wrapperVisualizzaUserStorico");
         wrapperListVisualizzaPagineStorico = document.querySelector(".wrapperVisualizzaPagineStorico");
 
-    });
+    }); */
 }
 
 function openPageTestStorico(element) {
@@ -134,6 +136,18 @@ function AttivaDisattivaTest(e,idTest){
     axios.post("../api/api_AttivaDisattiva_test.php", formData
     ).then(response => {
         console.log(response.data);
+    });
+}
+
+function modificaTest(id, nome){
+    isMod = true;
+    idTestMod = id;
+    const formData = new FormData();
+    formData.append("idTest", id);
+    formData.append("testName", nome);
+    axios.post("../api/api_mod_test.php", formData
+    ).then(response => {
+        main.innerHTML = response.data;
     });
 }
 

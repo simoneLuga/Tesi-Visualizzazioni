@@ -6,6 +6,8 @@ var inp_check = document.getElementById("btn-check");
 var btn_forward = document.getElementById("btn_forward");
 var btn_backward = document.getElementById("btn_backward");
 
+var isMod=false;
+
 const buttonsWithSwitchClass = document.querySelectorAll("button.switch");
 
 function switchButton(e){
@@ -58,6 +60,7 @@ function startConf(){
         var yprediction = data.y; //these y coordinates are relative to the viewport
         console.log("x: " + xprediction + " y: " + yprediction);
     }).begin();
+    webgazer.applyKalmanFilter(webgazer.params.applyKalmanFilter);
 }
 
 function stopConf(){

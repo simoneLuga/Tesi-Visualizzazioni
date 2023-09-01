@@ -12,7 +12,7 @@
                         </span>
                         <div class="btn-group col-6 " role="group" aria-label="Basic example">
                             <button type="button" class="btn btn-sm btn-secondary"
-                                onclick="modificaTest(<?php echo $test['ID'] ?>)">Mod
+                                onclick="modificaTest('<?php echo $test['ID'] ?>','<?php echo $test['Nome'] ?>')">Mod
                             </button>
                             <button type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
                                 data-bs-target="#modalDelete<?php echo $test['ID'] ?>">Del</button>
@@ -32,7 +32,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No,
                                                 chiudi.</button>
-                                            <button type="button" class="btn btn-warning" data-bs-dismiss="modal"
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
                                                 onclick="delTest(<?php echo $test['ID'] ?>)">SI.</button>
                                         </div>
                                     </div>

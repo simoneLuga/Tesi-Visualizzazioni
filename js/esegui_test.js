@@ -110,6 +110,7 @@ function initWebGazer() {
             }
         }
     }).begin();
+    webgazer.applyKalmanFilter(webgazer.params.applyKalmanFilter);
 }
 
 
