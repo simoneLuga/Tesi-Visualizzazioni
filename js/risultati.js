@@ -75,7 +75,7 @@ function loadLineMap() {
 
     const ctx = document.querySelector(".heatmap-canvas").getContext('2d');
 
-    ctx.strokeStyle = 'blue'; // Colore della linea (puoi cambiarlo a tuo piacimento)
+    ctx.strokeStyle = 'red'; // Colore della linea (puoi cambiarlo a tuo piacimento)
     ctx.lineWidth = 1;
 
     ctx.clearRect(0, 0, document.querySelector(".heatmap-canvas").width, document.querySelector(".heatmap-canvas").height);

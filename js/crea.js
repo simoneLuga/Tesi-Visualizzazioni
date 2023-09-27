@@ -223,7 +223,7 @@ function saveNewTest() {
                     formData.append("src", tripla.value);
                     formData.append("type", tripla.type);
                     axios.post("../api/api_add_pagina.php", formData).then(response2 => {
-                        console.log(response2.data);
+                        /* console.log(response2.data); */
                         var wrapper = document.querySelector(".wrapper");
                         wrapper.innerHTML = "";
                         document.getElementById("inputTitle").value = "";

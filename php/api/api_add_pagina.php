@@ -2,7 +2,7 @@
 require_once 'bootstrap.php';
 
 $result = "0";
-if ($_SESSION['type']) {
+if (isset($_SESSION['type'])) {
     if (isset($_POST['idPadre'], $_POST["type"])) {
         $idPadre = $_POST['idPadre'];
         $type = $_POST["type"];

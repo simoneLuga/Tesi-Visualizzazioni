@@ -101,7 +101,7 @@ function delTest(idTest) {
     axios.post("../api/api_del_test.php", formData
     ).then(response => {
         console.log("eliminazione di " + idTest + " avvenuta con successo");
-        /* console.log(response.data); */
+        console.log(response.data);
         axios.post("../api/api_storico.php"
         ).then(response => {
             main.innerHTML = response.data;

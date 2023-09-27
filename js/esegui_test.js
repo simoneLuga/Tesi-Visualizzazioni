@@ -137,7 +137,7 @@ function forward() {
         }
         webgazer.resume();
     }else{
-        window.location.assign("../page/ultima_pagina.php");
+        window.location.assign("../api/api_ultimaPagina.php");
     }
 }
 

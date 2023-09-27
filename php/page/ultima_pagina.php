@@ -20,10 +20,24 @@
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
+                <?php if ($templateParams['giaLoggato'] == true){
+                    ?> 
+                    <li class="nav-item">
+                        <button class="nav-link switch active" onclick="returnBack()"
+                            aria-label="button test ">Statistics</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link switch" onclick="logout()" aria-label="button test ">logout</button>
+                    </li>
+                    <?php
+                }else {
+                    ?> 
                     <li class="nav-item">
                         <button class="nav-link switch" id="btn_creaTest" onclick="logout()"
                             aria-label="button test ">login</button>
                     </li>
+                    <?php
+                } ?>
                 </ul>
             </div>
         </div>
@@ -48,7 +62,11 @@
         function logout() {
             window.location.replace("../api/api_logout.php");
         }
+        function returnBack(){
+            window.location.assign("../page/base.php");
+        }
     </script>
+    
     <link rel="stylesheet" href="../../css/style.css" type="text/css">
 
 </body>

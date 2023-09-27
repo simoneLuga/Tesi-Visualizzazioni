@@ -2,7 +2,7 @@
 require_once 'bootstrap.php';
 
 $result = false;
-if ($_SESSION['type']) {
+if (isset($_SESSION['type'])) {
     if (isset($_POST['title'])) {
         $title = $_POST['title'];
         $id_test = $dbh->save_new_test($title);

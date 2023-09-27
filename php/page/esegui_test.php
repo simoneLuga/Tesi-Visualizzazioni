@@ -76,10 +76,25 @@
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
+                <?php if ($templateParams['giaLoggato'] == true){
+                    ?> 
+                    <li class="nav-item">
+                        <button class="nav-link switch active" onclick="returnBack()"
+                            aria-label="button test ">Statistics</button>
+                    </li>
+
+                    <li class="nav-item">
+                        <button class="nav-link switch" onclick="logout()" aria-label="button test ">logout</button>
+                    </li>
+                    <?php
+                }else {
+                    ?> 
                     <li class="nav-item">
                         <button class="nav-link switch" id="btn_creaTest" onclick="logout()"
                             aria-label="button test ">login</button>
                     </li>
+                    <?php
+                } ?>
                 </ul>
             </div>
             <fieldset class="d-flex row" id="div_console" style="color: #9B9D9E;" disabled>
@@ -140,7 +155,11 @@
         function logout() {
             window.location.replace("../api/api_logout.php");
         }
+        function returnBack(){
+            window.location.assign("../page/base.php");
+        }
     </script>
+    
     <script src="../../js/esegui_test.js"></script>
     <script src="../../js/webgazer.js" type="text/javascript"></script>
     <link rel="stylesheet" href="../../css/style.css" type="text/css">

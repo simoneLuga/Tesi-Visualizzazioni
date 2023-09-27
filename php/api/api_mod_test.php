@@ -1,6 +1,6 @@
 <?php
 require_once 'bootstrap.php';
-if ($_SESSION['type']) {
+if (isset($_SESSION['type'])){
     if (isset($_POST['idTest'], $_POST['testName'])) {
         $pagine = $dbh->get_pagine_test($_POST['idTest']);
         if($pagine!=null){
